@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { Suspense } from 'react';
+import PostUser from '../../../components/postUser/postUser';
 import styles from './singlePost.module.css';
 
 const getData = async (slug) => {
@@ -33,10 +35,9 @@ const SinglePostPage = async ({params}) => {
                     height={50}
                     className={styles.avator}
                     />
-                    <div className={styles.detailText}>
-                        <span className={styles.detailTitle}>Author</span>
-                        <span className={styles.detailValue}>Yusuke Mizutani</span>
-                    </div>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <PostUser userId = {post.userId} />
+                    </Suspense>
                     <div className={styles.detailText}>
                         <span className={styles.detailTitle}>Published</span>
                         <span className={styles.detailValue}>01.01.2024</span>
